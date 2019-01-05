@@ -1,0 +1,13 @@
+sudo: required
+services:
+  - docker
+
+# build the dev image so we can run test
+before_install:
+  - docker build -t dhedgecock/docker-react -f Dockerfile.dev .
+
+# commands needed to run test suite
+# run the dev image, overriding with a custom test command, and pass coverage
+# so command exits
+script:
+  - docker run dhedgecock/docker-react npm run test -- --coverage
