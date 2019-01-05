@@ -1,4 +1,6 @@
 version: '3'
+# docker-compose up will start a dev and test container that will update on
+# file change b/c of volume mounts
 services:
   web:
     build:
@@ -7,6 +9,8 @@ services:
     ports:
       - '3000:3000'
     volumes:
+      # anonymouse volume mount prevents the bind mount from overriding the
+      # image node_modules directory
       - /app/node_modules
       - .:/app
   tests:

@@ -13,14 +13,17 @@ script:
   - docker run dhedgecock/docker-react npm run test -- --coverage
 
 deploy:
+  # Travis configs for deploying to Beanstalk
   provider: elasticbeanstalk
   region: "us-west-2"
   app: "docker-react"
   env: "DockerReact-env"
   bucket_name: "elasticbeanstalk-us-west-2-950235411039"
   bucket_path: "docker-react"
+  # Only deploy on push to master
   on:
     branch: master
+  # API access keys stored as env variables in Travis configs
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key:
     secure: "$AWS_SECRET_KEY"
